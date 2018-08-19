@@ -28,7 +28,19 @@ namespace JWTSample
             var connectionString = Configuration["connectionStrings:DBConnectionString"];
             services.AddDbContext<ApplicationContext>(o => o.UseSqlServer(connectionString));
 
-            services.AddIdentityCore<ApplicationUser>()
+            services.AddIdentityCore<ApplicationUser>(options =>
+            {
+                //// Password settings
+                //options.Password.RequireDigit = true;
+                //options.Password.RequiredLength = 8;
+                //options.Password.RequiredUniqueChars = 2;
+                //options.Password.RequireLowercase = true;
+                //options.Password.RequireNonAlphanumeric = true;
+                //options.Password.RequireUppercase = true;
+
+                //// User settings
+                //options.User.RequireUniqueEmail = true;
+            })
                 .AddEntityFrameworkStores<ApplicationContext>();
 
             // Add and configure jwt authentication services
